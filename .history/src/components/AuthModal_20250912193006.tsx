@@ -202,10 +202,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, language, demoTitle }: A
                     params.set('prefill', '1');
                     params.set('message', body);
                     if (typeof window !== 'undefined') {
-                      window.location.hash = `contact?${params.toString()}`;
-                      // try to smooth scroll if already on page
-                      const el = document.getElementById('contact');
-                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      window.location.href = `/#contact?${params.toString()}`;
                     }
                   } finally {
                     onClose();

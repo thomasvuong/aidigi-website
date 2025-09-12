@@ -1,6 +1,6 @@
 
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,17 +18,10 @@ export function ContactSection({ language }: ContactSectionProps) {
   const [prefill, setPrefill] = useState<{ subject?: string; message?: string } | null>(null);
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
-    const hash = window.location.hash.replace(/^#/, '');
-    const [anchor, query] = hash.includes('?') ? hash.split('?') : ['', ''];
-    if (anchor === 'contact') {
-      const params = new URLSearchParams(query);
-      const subject = params.get('subject') || undefined;
-      const message = params.get('message') || undefined;
-      if (subject || message) setPrefill({ subject, message });
-      // ensure we scroll into view when arriving with hash
-      const el = document.getElementById('contact');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    const params = new URLSearchParams(window.location.hash.replace(/^#/, '').split('?')[1] || window.location.search.replace(/^\?/, ''));
+    const subject = params.get('subject') || undefined;
+    const message = params.get('message') || undefined;
+    if (subject || message) setPrefill({ subject, message });
   }, []);
 
   const founders = [

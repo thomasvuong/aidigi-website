@@ -1,6 +1,6 @@
 
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,22 +14,6 @@ interface ContactSectionProps {
 export function ContactSection({ language }: ContactSectionProps) {
   const t = useTranslation(language);
   const [preview, setPreview] = useState<null | { src: string; alt: string }>(null);
-  // Read prefill from URL (subject/message)
-  const [prefill, setPrefill] = useState<{ subject?: string; message?: string } | null>(null);
-  React.useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const hash = window.location.hash.replace(/^#/, '');
-    const [anchor, query] = hash.includes('?') ? hash.split('?') : ['', ''];
-    if (anchor === 'contact') {
-      const params = new URLSearchParams(query);
-      const subject = params.get('subject') || undefined;
-      const message = params.get('message') || undefined;
-      if (subject || message) setPrefill({ subject, message });
-      // ensure we scroll into view when arriving with hash
-      const el = document.getElementById('contact');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, []);
 
   const founders = [
     { name: 'Mai Trọng Thi', role: language === 'vi' ? 'Đồng sáng lập & CEO' : 'Co-founder & CEO', avatar: '/images/mai-trong-thi.jpg' },
@@ -194,7 +178,6 @@ export function ContactSection({ language }: ContactSectionProps) {
                     {language === 'vi' ? 'Chủ đề' : 'Subject'}
                   </label>
                   <Input
-                    defaultValue={prefill?.subject}
                     placeholder={language === 'vi' ? 'Nhập chủ đề' : 'Enter subject'}
                     className="bg-gray-700 border-gray-600 text-white"
                   />
@@ -205,29 +188,11 @@ export function ContactSection({ language }: ContactSectionProps) {
                   </label>
                   <Textarea
                     rows={6}
-                    defaultValue={prefill?.message || (language === 'vi' ? 'Xin chào AIDIGI,\n\nTôi muốn yêu cầu quyền truy cập xem demo.\n\nTrân trọng.' : 'Hello AIDIGI,\n\nI would like to request access to view the demo.\n\nBest regards.')}
                     placeholder={language === 'vi' ? 'Nhập tin nhắn của bạn...' : 'Enter your message...'}
                     className="bg-gray-700 border-gray-600 text-white resize-none"
                   />
                 </div>
-                <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Basic mailto fallback to vuongdaonghe.com (per request)
-                    if (typeof window !== 'undefined') {
-                      const form = (e.currentTarget.closest('form') as HTMLFormElement) || undefined;
-                      const name = form?.querySelector('input[placeholder*="Họ và tên"], input[placeholder*="Full Name"]') as HTMLInputElement | null;
-                      const email = form?.querySelector('input[type="email"]') as HTMLInputElement | null;
-                      const subjectInput = form?.querySelector('input[placeholder*="Chủ đề"], input[placeholder*="Subject"]') as HTMLInputElement | null;
-                      const messageInput = form?.querySelector('textarea') as HTMLTextAreaElement | null;
-                      const subject = subjectInput?.value || (language === 'vi' ? 'Yêu cầu truy cập demo AIDIGI' : 'Request demo access AIDIGI');
-                      const details = `\n\nName: ${name?.value || ''}\nEmail: ${email?.value || ''}`;
-                      const body = encodeURIComponent(`${messageInput?.value || ''}${details}`);
-                      const mailto = `mailto:contact@vuongdaonghe.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-                      window.location.href = mailto;
-                    }
-                  }}
-                >
+                <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">
                   {language === 'vi' ? 'Gửi tin nhắn' : 'Send Message'}
                 </Button>
               </form>
