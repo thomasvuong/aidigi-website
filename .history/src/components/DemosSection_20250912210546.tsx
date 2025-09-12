@@ -33,8 +33,8 @@ export function DemosSection({ language }: DemosSectionProps) {
         ? 'Kiểm tra tính hợp lệ và xác thực tài liệu tự động'
         : 'Automated document validity checking and verification',
       image: 'https://www.itrportal.com/assets/components/phpthumbof/cache/bigstock-digital-transformation-change-412358392%281%29.7bf076f1aa0636fef32dc8d7253de333.jpg',
-      url: 'https://studio--studio-7574048319-6ecfd.us-central1.hosted.app',
-      isExternal: true
+      url: '/demo/document-validation',
+      isExternal: false
     },
     {
       title: t.demos.demo3,

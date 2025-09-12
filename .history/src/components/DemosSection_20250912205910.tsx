@@ -15,7 +15,6 @@ export function DemosSection({ language }: DemosSectionProps) {
   const [selectedDemo, setSelectedDemo] = useState<null | number>(null);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
-  const [videoConfig, setVideoConfig] = useState<null | { videoId: string; tryUrl: string }>(null);
 
   const demos = [
     {
@@ -33,8 +32,8 @@ export function DemosSection({ language }: DemosSectionProps) {
         ? 'Kiểm tra tính hợp lệ và xác thực tài liệu tự động'
         : 'Automated document validity checking and verification',
       image: 'https://www.itrportal.com/assets/components/phpthumbof/cache/bigstock-digital-transformation-change-412358392%281%29.7bf076f1aa0636fef32dc8d7253de333.jpg',
-      url: 'https://studio--studio-7574048319-6ecfd.us-central1.hosted.app',
-      isExternal: true
+      url: '/demo/document-validation',
+      isExternal: false
     },
     {
       title: t.demos.demo3,
@@ -81,22 +80,17 @@ export function DemosSection({ language }: DemosSectionProps) {
   const handleAuthSuccess = () => {
     if (selectedDemo !== null) {
       const demo = demos[selectedDemo];
-      // Demo-specific video overlays
-      if (selectedDemo === 0) {
-        setVideoConfig({ videoId: 'P9lVIqU6GrE', tryUrl: 'https://studio--one-touch-iqrnp.us-central1.hosted.app/?fbclid=IwY2xjawKz6DtleHRuA2FlbQIxMQABHm0zGNou8A03w8YLn66c8njTwrbr_WAGlsdYRIAlFLYuQ9MU0mxNle9MPrLk_aem_O3TDm6G5OsQ7ScFtjbPFLg' });
-        setIsVideoOpen(true);
-        setShowPlayer(false);
-      } else if (selectedDemo === 3) {
-        setVideoConfig({ videoId: 'MZrOdAGFhoc', tryUrl: 'http://localhost:8000/FinalLocalAI_Ollama.html' });
-        setIsVideoOpen(true);
-        setShowPlayer(false);
-      } else {
-        // Default behavior
-        if (demo.isExternal) {
-          window.open(demo.url, '_blank');
+      if (demo.isExternal) {
+        // For demo 1, show an inline video + CTA overlay instead of opening a new tab
+        if (selectedDemo === 0) {
+          setIsVideoOpen(true);
+          setShowPlayer(false);
         } else {
-          window.location.href = demo.url;
+          window.open(demo.url, '_blank');
         }
+      } else {
+        // For internal demos, redirect to the static page
+        window.location.href = demo.url;
       }
       setIsAuthModalOpen(false);
       setSelectedDemo(null);
@@ -208,7 +202,7 @@ export function DemosSection({ language }: DemosSectionProps) {
         demoTitle={selectedDemo !== null ? demos[selectedDemo].title : ''}
       />
 
-      {isVideoOpen && videoConfig && (
+      {isVideoOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
           <div className="bg-gray-900 border border-gray-700 rounded-lg w-full max-w-3xl mx-auto overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
@@ -230,7 +224,7 @@ export function DemosSection({ language }: DemosSectionProps) {
                   onClick={() => setShowPlayer(true)}
                 >
                   <img
-                    src={`https://img.youtube.com/vi/${videoConfig.videoId}/hqdefault.jpg`}
+                    src="https://img.youtube.com/vi/P9lVIqU6GrE/hqdefault.jpg"
                     alt="YouTube thumbnail"
                     className="w-full h-full object-cover"
                     loading="lazy"
@@ -247,7 +241,7 @@ export function DemosSection({ language }: DemosSectionProps) {
               ) : (
                 <iframe
                   className="w-full h-full"
-                  src={`https://www.youtube-nocookie.com/embed/${videoConfig.videoId}?autoplay=1&modestbranding=1&rel=0`}
+                  src="https://www.youtube-nocookie.com/embed/P9lVIqU6GrE?autoplay=1&modestbranding=1&rel=0"
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -257,7 +251,7 @@ export function DemosSection({ language }: DemosSectionProps) {
             </div>
             <div className="p-4 border-t border-gray-800 flex items-center justify-between gap-3">
               <a
-                href={videoConfig.tryUrl}
+                href="https://studio--one-touch-iqrnp.us-central1.hosted.app/?fbclid=IwY2xjawKz6DtleHRuA2FlbQIxMQABHm0zGNou8A03w8YLn66c8njTwrbr_WAGlsdYRIAlFLYuQ9MU0mxNle9MPrLk_aem_O3TDm6G5OsQ7ScFtjbPFLg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
