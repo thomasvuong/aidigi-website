@@ -1,6 +1,4 @@
-
 'use client';
-import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,7 +11,6 @@ interface ContactSectionProps {
 
 export function ContactSection({ language }: ContactSectionProps) {
   const t = useTranslation(language);
-  const [preview, setPreview] = useState<null | { src: string; alt: string }>(null);
 
   const founders = [
     { name: 'Mai Trọng Thi', role: language === 'vi' ? 'Đồng sáng lập & CEO' : 'Co-founder & CEO', avatar: '/images/mai-trong-thi.jpg' },
@@ -23,7 +20,6 @@ export function ContactSection({ language }: ContactSectionProps) {
   ];
 
   return (
-    <>
     <section id="contact" className="py-20 bg-gray-900">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
@@ -104,14 +100,11 @@ export function ContactSection({ language }: ContactSectionProps) {
                         <img
                           src={founder.avatar}
                           alt={founder.name}
-                          width={48}
-                          height={48}
-                          className="w-12 h-12 rounded-full object-cover object-center border border-gray-600 cursor-zoom-in"
+                          className="w-10 h-10 rounded-full object-cover object-center border border-gray-600"
                           loading="lazy"
-                          onClick={() => setPreview({ src: founder.avatar!, alt: founder.name })}
                         />
                       ) : (
-                        <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
                           <span className="text-white font-bold">{founder.name.charAt(0)}</span>
                         </div>
                       )}
@@ -201,20 +194,5 @@ export function ContactSection({ language }: ContactSectionProps) {
         </div>
       </div>
     </section>
-    {preview && (
-      <div
-        className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
-        onClick={() => setPreview(null)}
-      >
-        <div className="max-w-[90vw] max-h-[90vh]">
-          <img
-            src={preview.src}
-            alt={preview.alt}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-          />
-        </div>
-      </div>
-    )}
-    </>
   );
 }

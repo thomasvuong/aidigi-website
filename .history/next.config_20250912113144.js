@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static export (no server needed)
-  output: 'export',
+  // Uncomment for static export (no server needed)
+  // output: 'export',
   allowedDevOrigins: ["*.preview.same-app.com"],
   // Memory optimization for shared hosting
   experimental: {

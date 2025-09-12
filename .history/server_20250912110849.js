@@ -3,9 +3,9 @@ const { createServer } = require("http");
 const next = require("next");
 const { parse } = require("url");
 
-// Set memory limit for shared hosting (max 1.5GB)
+// Set memory limit for shared hosting (max 2GB)
 if (process.env.NODE_ENV === 'production') {
-  process.env.NODE_OPTIONS = '--max-old-space-size=1536';
+  process.env.NODE_OPTIONS = '--max-old-space-size=2048';
 }
 
 const port = process.env.PORT || 3000;

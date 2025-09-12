@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 --turbopack",
-    "build": "NODE_OPTIONS='--max-old-space-size=512' next build",
-    "build:static": "NODE_OPTIONS='--max-old-space-size=1024' next build && next export",
+    "build": "NODE_OPTIONS='--max-old-space-size=1536' next build",
     "start": "node server.js",
     "lint": "bunx tsc --noEmit && next lint",
     "format": "bunx biome format --write"

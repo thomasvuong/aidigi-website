@@ -23,7 +23,6 @@ export function ContactSection({ language }: ContactSectionProps) {
   ];
 
   return (
-    <>
     <section id="contact" className="py-20 bg-gray-900">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
@@ -215,6 +214,5 @@ export function ContactSection({ language }: ContactSectionProps) {
         </div>
       </div>
     )}
-    </>
   );
 }

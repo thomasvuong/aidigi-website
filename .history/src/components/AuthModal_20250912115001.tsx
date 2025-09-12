@@ -47,13 +47,35 @@ export function AuthModal({ isOpen, onClose, onSuccess, language, demoTitle }: A
   };
 
   const handleBiometricAuth = async (method: 'fingerprint' | 'face') => {
-    // Show admin-only notification for static export
-    setAuthError(
-      language === 'vi' 
-        ? 'Tính năng sinh trắc học chỉ dành cho quản trị viên. Vui lòng sử dụng mật khẩu.'
-        : 'Biometric features are admin-only. Please use password authentication.'
-    );
-    setIsAuthenticating(false);
+    setIsAuthenticating(true);
+    setAuthError('');
+    try {
+      const resOpts = await fetch('/api/webauthn/generate-authentication-options', { method: 'POST' });
+      if (!resOpts.ok) throw new Error('Failed to get options');
+      const options = await resOpts.json();
+      const { startAuthentication } = await import('@simplewebauthn/browser');
+      const asseResp = await startAuthentication(options);
+      const verifyRes = await fetch('/api/webauthn/verify-authentication', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(asseResp),
+      });
+      if (!verifyRes.ok) throw new Error('Auth verify failed');
+      const verifyJson = await verifyRes.json();
+      if (verifyJson.verified) {
+        onSuccess();
+      } else {
+        throw new Error('Not verified');
+      }
+    } catch (e) {
+      setAuthError(
+        language === 'vi'
+          ? `Không thể xác thực ${method === 'fingerprint' ? 'vân tay' : 'khuôn mặt'}`
+          : `${method === 'fingerprint' ? 'Fingerprint' : 'Face'} authentication failed`
+      );
+    } finally {
+      setIsAuthenticating(false);
+    }
   };
 
   const handleBiometricRegister = async () => {
