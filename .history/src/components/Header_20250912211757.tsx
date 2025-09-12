@@ -16,7 +16,6 @@ export function Header({ language, setLanguage }: HeaderProps) {
   const [permPwd, setPermPwd] = useState('');
   const [lifetimeMin, setLifetimeMin] = useState(45);
   const [genPass, setGenPass] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
 
   function generateCode(length = 8) {
@@ -27,7 +26,6 @@ export function Header({ language, setLanguage }: HeaderProps) {
   }
 
   return (
-    <>
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -199,26 +197,20 @@ export function Header({ language, setLanguage }: HeaderProps) {
             ) : (
               <>
                 <div className="text-gray-300 text-sm">
-                  {language === 'vi' ? 'Mật khẩu (kèm hạn dùng)' : 'Password (with expiry token)'}
+                  {language === 'vi' ? 'Mật khẩu tạm thời' : 'Temporary password'}
                 </div>
-                <div className="text-white text-sm md:text-lg font-mono break-all bg-gray-800 border border-gray-700 rounded px-3 py-2">{`${genPass}.${Date.now() + lifetimeMin * 60 * 1000}`}</div>
+                <div className="text-white text-2xl font-mono tracking-widest">{genPass}</div>
                 <div className="text-gray-400 text-sm">
                   {language === 'vi' ? 'Hết hạn sau' : 'Expires in'} ~ {lifetimeMin} {language === 'vi' ? 'phút' : 'minutes'}
                 </div>
-                {copied && <div className="text-green-400 text-sm">{language === 'vi' ? 'Đã sao chép mật khẩu' : 'Password is copied'}</div>}
                 <div className="flex gap-3">
                   <Button
                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
                     onClick={() => {
-                      const token = `${genPass}.${Date.now() + lifetimeMin * 60 * 1000}`;
-                      if (navigator.clipboard) {
-                        navigator.clipboard.writeText(token);
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 2000);
-                      }
+                      if (navigator.clipboard) navigator.clipboard.writeText(genPass);
                     }}
                   >
-                    {language === 'vi' ? 'Sao chép mật khẩu' : 'Copy password'}
+                    {language === 'vi' ? 'Sao chép' : 'Copy'}
                   </Button>
                   <Button
                     variant="outline"
@@ -234,6 +226,5 @@ export function Header({ language, setLanguage }: HeaderProps) {
         </div>
       </div>
     )}
-    </>
   );
 }

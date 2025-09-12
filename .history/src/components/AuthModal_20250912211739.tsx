@@ -37,20 +37,10 @@ export function AuthModal({ isOpen, onClose, onSuccess, language, demoTitle }: A
     try {
       let valid = password === 'orihara';
       if (!valid && typeof window !== 'undefined') {
-        // Accept either localStorage temp code or a redeemed token "CODE.EXPIRY"
         const temp = localStorage.getItem('aidigi_temp_pass');
         const exp = Number(localStorage.getItem('aidigi_temp_exp') || 0);
         if (temp && Date.now() < exp && password === temp) {
           valid = true;
-        } else if (password.includes('.')) {
-          const [code, expStr] = password.split('.');
-          const tokenExp = Number(expStr || 0);
-          if (code && tokenExp && Date.now() < tokenExp) {
-            // store locally for subsequent uses within expiry
-            localStorage.setItem('aidigi_temp_pass', code);
-            localStorage.setItem('aidigi_temp_exp', String(tokenExp));
-            valid = true;
-          }
         }
       }
       if (valid) {

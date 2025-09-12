@@ -49,7 +49,7 @@ export function AuthModal({ isOpen, onClose, onSuccess, language, demoTitle }: A
             // store locally for subsequent uses within expiry
             localStorage.setItem('aidigi_temp_pass', code);
             localStorage.setItem('aidigi_temp_exp', String(tokenExp));
-            valid = true;
+            if (password === `${code}.${tokenExp}`) valid = true;
           }
         }
       }
