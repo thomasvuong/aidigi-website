@@ -44,54 +44,19 @@ export function Header({ language, setLanguage }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a 
-              href="#platform" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#platform" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.platform}
             </a>
-            <a 
-              href="#solutions" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#solutions" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.solutions}
             </a>
-            <a 
-              href="#demos" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('demos')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#demos" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.demos}
             </a>
-            <a 
-              href="#about" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#about" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.about}
             </a>
-            <a 
-              href="#contact" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.contact}
             </a>
           </nav>
@@ -149,105 +114,21 @@ export function Header({ language, setLanguage }: HeaderProps) {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <nav className="flex flex-col space-y-4 mt-4">
-              <a 
-                href="#platform" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#platform" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.platform}
               </a>
-              <a 
-                href="#solutions" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#solutions" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.solutions}
               </a>
-              <a 
-                href="#demos" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('demos')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#demos" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.demos}
               </a>
-              <a 
-                href="#about" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#about" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.about}
               </a>
-              <a 
-                href="#contact" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.contact}
               </a>
-              
-              {/* Mobile Language Switcher */}
-              <div className="flex items-center justify-center space-x-2 pt-4 border-t border-gray-700">
-                <span className="text-gray-400 text-sm">Language:</span>
-                <div className="flex items-center bg-gray-800 rounded-md p-1">
-                  <button
-                    onClick={() => setLanguage('en')}
-                    className={`px-3 py-1 text-sm rounded ${
-                      language === 'en'
-                        ? 'bg-blue-500 text-white'
-                        : 'text-gray-400 hover:text-white'
-                    }`}
-                  >
-                    EN
-                  </button>
-                  <button
-                    onClick={() => setLanguage('vi')}
-                    className={`px-3 py-1 text-sm rounded ${
-                      language === 'vi'
-                        ? 'bg-blue-500 text-white'
-                        : 'text-gray-400 hover:text-white'
-                    }`}
-                  >
-                    VI
-                  </button>
-                </div>
-              </div>
-              
-              {/* Mobile Get Started Button */}
-              <div className="pt-2">
-                <Button
-                  className="w-full bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
-                  onClick={() => {
-                    setError('');
-                    setGenPass(null);
-                    setPermPwd('');
-                    setLifetimeMin(45);
-                    setIsTempModalOpen(true);
-                    setIsMenuOpen(false); // Close mobile menu when opening modal
-                  }}
-                >
-                  {t.nav.getStarted}
-                </Button>
-              </div>
             </nav>
           </div>
         )}

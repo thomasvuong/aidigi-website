@@ -44,54 +44,19 @@ export function Header({ language, setLanguage }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a 
-              href="#platform" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#platform" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.platform}
             </a>
-            <a 
-              href="#solutions" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#solutions" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.solutions}
             </a>
-            <a 
-              href="#demos" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('demos')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#demos" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.demos}
             </a>
-            <a 
-              href="#about" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#about" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.about}
             </a>
-            <a 
-              href="#contact" 
-              className="text-gray-300 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
               {t.nav.contact}
             </a>
           </nav>
@@ -149,59 +114,19 @@ export function Header({ language, setLanguage }: HeaderProps) {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-800">
             <nav className="flex flex-col space-y-4 mt-4">
-              <a 
-                href="#platform" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#platform" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.platform}
               </a>
-              <a 
-                href="#solutions" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#solutions" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.solutions}
               </a>
-              <a 
-                href="#demos" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('demos')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#demos" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.demos}
               </a>
-              <a 
-                href="#about" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#about" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.about}
               </a>
-              <a 
-                href="#contact" 
-                className="text-gray-300 hover:text-white transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  setIsMenuOpen(false);
-                }}
-              >
+              <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
                 {t.nav.contact}
               </a>
               
