@@ -2,6 +2,8 @@
 const nextConfig = {
   allowedDevOrigins: ["*.preview.same-app.com"],
   output: 'export',
+  basePath: '/demo/Cross-Agency-Data-Integration',
+  assetPrefix: '/demo/Cross-Agency-Data-Integration/',
   images: {
     unoptimized: true,
     domains: [
