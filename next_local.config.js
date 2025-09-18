@@ -1,9 +1,34 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ["*.preview.same-app.com"],
+  // Static export (no server needed)
   output: 'export',
-  basePath: '/demo/Cross-Agency-Data-Integration',
-  assetPrefix: '/demo/Cross-Agency-Data-Integration/',
+  allowedDevOrigins: ["*.preview.same-app.com"],
+  // Memory optimization for shared hosting
+  experimental: {
+    memoryBasedWorkers: false,
+  },
+  // Reduce build memory usage
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        cacheGroups: {
+          default: {
+            minChunks: 1,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            priority: -10,
+            chunks: 'all',
+          },
+        },
+      };
+    }
+    return config;
+  },
   images: {
     unoptimized: true,
     domains: [
@@ -35,7 +60,6 @@ const nextConfig = {
       },
     ],
   },
-  trailingSlash: true
 };
 
 module.exports = nextConfig;
